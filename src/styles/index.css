@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #C4A2F2;
+  color: #0C0C0C;
+}
+
+input:focus-visible, input:focus, button:focus-visible, button:focus {
+  outline: none;
+  box-shadow: 0px 0px px 1px #0C0C0C;
+}
+
+
