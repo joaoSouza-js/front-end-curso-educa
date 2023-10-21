@@ -9,7 +9,7 @@ interface TextInputRootProps {
 
 function TextInputRoot({ children, className }: TextInputRootProps) {
     const TextInputClass = tv({
-        base: "flex gap-2 w-full "
+        base: "flex gap-2 w-full flex-col"
     })
 
     return (
@@ -18,7 +18,6 @@ function TextInputRoot({ children, className }: TextInputRootProps) {
         </div>
     )
 }
-
 
 type InputProps = ComponentProps<'input'> & {
     icon?: React.ReactNode;
@@ -42,7 +41,7 @@ const TextInputBase = forwardRef<HTMLInputElement, textInputBaseProps>(
 const TextInputInput = forwardRef<HTMLInputElement, InputProps>(
     ({ icon: Icon, ...inputProps }, ref) => {
         return (
-            <div className=" flex-1 px-6 rounded-xl bg-gray-100 border-2 h-12 items-center  focus-within:border-purple-700 flex flex-row ">
+            <div className=" h-12 px-6 rounded-xl bg-gray-100 border-2  items-center  focus-within:border-purple-700 flex flex-row ">
                 {
                     Icon && (
                         <div className="mr-2">
@@ -66,7 +65,7 @@ const TextInputPassword = forwardRef<HTMLInputElement, textInputBaseProps>(
         }
 
         return (
-            <div className="flex-1  px-6 rounded-xl bg-gray-100 border-2 h-12 items-center  focus-within:border-purple-700 flex flex-row ">
+            <div className=" h-12  px-6 rounded-xl bg-gray-100 border-2  items-center  focus-within:border-purple-700 flex flex-row ">
                 <TextInputBase
                     {...inputProps}
                     type={passwordIsVisible ? 'text' : 'password'}
@@ -95,7 +94,7 @@ interface TextInputErrorProps {
 
 function TextInputError({ children }: TextInputErrorProps) {
     return (
-        <div className="text-red-500 text-sm">
+        <div className="text-red-400 text-sm">
             {children}
         </div>
     )

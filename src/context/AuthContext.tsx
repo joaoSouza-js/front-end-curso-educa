@@ -30,7 +30,7 @@ interface SignInResponse {
 export const AuthContext = createContext({} as AuthContextProps)
 
 export function AuthContextProvider({children}: AuthContextProviderProps){
-    
+
     function saveToken(token: string){
         saveAuthToken(token)
         api.defaults.headers.common.Authorization = `Bearer ${token}`
@@ -42,7 +42,7 @@ export function AuthContextProvider({children}: AuthContextProviderProps){
                 email,
                 password,
             })
-            console.log(response.data)
+           
             saveToken(response.data.token)
             
         } catch (error: any) {
