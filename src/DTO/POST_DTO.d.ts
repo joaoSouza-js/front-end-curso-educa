@@ -12,3 +12,10 @@ interface POST_DTO {
     category:string
     owner: boolean;
 }
+
+interface POST_DTO_CREATE {
+    title: string,
+    content: string,
+    categoryId: string,
+    schedule?: Date
+}

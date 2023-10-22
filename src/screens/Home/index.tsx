@@ -4,24 +4,22 @@ import { Search,SlidersHorizontal } from "lucide-react";
 import { Card } from "./components/Card";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-import { set } from "zod";
-
-interface PostResponse{
-    data: POST_DTO[]
-}
+import { usePost } from "../../hooks/usePost";
 
 export function Home(){
-    const [isFetchingPost, setIsFetchingPost] = useState(false)
-    const [posts, setPosts] = useState<POST_DTO[]>([])
+    const [isFetchingPost, setIsFetchingPost,] = useState(false)
+
+    const {fetchPosts,posts} = usePost()
 
     async function handleFetchPost(){
+        setIsFetchingPost(true)
         try {
-            const response = await api.get<POST_DTO[]>('/posts')
-            console.log(response.data)
-            setPosts(response.data)
-            
+            await fetchPosts()   
         } catch (error) {
             console.log(error)
+        }
+        finally{
+            setIsFetchingPost(false)
         }
     }
 
@@ -35,13 +33,16 @@ export function Home(){
             
             <div className="px-4 py-5">
                 <div className="flex items-center gap-y-2 gap-x-2">
-                    <TextInput.Root>
-                        <TextInput.Input
-                            placeholder="Digite o titulo do post"
-                            type="text"
-                            icon={<Search size={16} />}
-                        />
-                    </TextInput.Root>
+                    <form className="w-full">
+
+                        <TextInput.Root>
+                            <TextInput.Input
+                                placeholder="Digite o titulo do post"
+                                type="text"
+                                icon={<Search size={16} />}
+                            />
+                        </TextInput.Root>
+                    </form>
                     <button title="Filtro">
                         <SlidersHorizontal 
                             size={34} 
@@ -55,19 +56,13 @@ export function Home(){
                     {
                         posts.map(post => (
                             <Card
+                                key={post.id}
                                 post={post}
                             />
                         ))
                     }
-                  
-                  
                 </main>
-
-                
-
             </div>
-
-
         </div>
     )
 }

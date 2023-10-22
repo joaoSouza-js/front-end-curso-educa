@@ -2,6 +2,7 @@ import { ComponentProps } from 'react';
 import { tv } from "tailwind-variants";
 import { Trash2 } from 'lucide-react';
 import { Button } from '../../../components/Button';
+import { DeletePostModal } from '../../../components/DeletePostModal';
 
 interface CardProps extends ComponentProps<'div'> {
     post: POST_DTO
@@ -15,7 +16,7 @@ export function Card({post,className, ...rest}:CardProps){
             {...rest}
         >
             <header className='flex justify-between items-center'>
-                <h2 className='text-xl'>
+                <h2 className='text-xl pr-4'>
                     {title}
                 </h2>
                 <Button className='bg-purple-400 w-auto px-3 text-xs h-auto     py-2  rounded-2xl'>
@@ -28,9 +29,11 @@ export function Card({post,className, ...rest}:CardProps){
             </p>
             {
                 post.owner && (
-                    <button type='button' className='self-end'>
-                        <Trash2 size={24} />
-                    </button>
+                    <DeletePostModal postId={post.id}>
+                        <button type='button' className='self-end'>
+                            <Trash2 size={24} />
+                        </button>
+                    </DeletePostModal>
 
                 )
             }
