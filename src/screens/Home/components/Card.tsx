@@ -24,9 +24,9 @@ export function Card({post,className, ...rest}:CardProps){
                 </Button>
             </header>
 
-            <p className='overflow-auto text-sm'>
-                {content}
-            </p>
+                <div className='overflow-auto text-sm'  dangerouslySetInnerHTML={{ __html: content }}/>
+
+                
             {
                 post.owner && (
                     <DeletePostModal postId={post.id}>

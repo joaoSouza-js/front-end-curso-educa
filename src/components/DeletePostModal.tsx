@@ -3,11 +3,12 @@ import { DialogPortal } from './DialogPortal';
 import { ReactNode, useState } from 'react';
 import { usePost } from '../hooks/usePost';
 import { AppError } from '../utils/AppErros';
+import { Button } from './Button';
 
 interface DeletePostModalProps {
     children: ReactNode,
     postId: string
-}
+} 
 
 export function DeletePostModal({children,postId}: DeletePostModalProps){
     const [isDeletingPost, setIsDeletingPost] = useState(false)
@@ -41,16 +42,22 @@ export function DeletePostModal({children,postId}: DeletePostModalProps){
                         Tem certeza que deseja <br/> deletar esse post?
                     </Dialog.Description>
                     <div className='mt-4 gap-2 flex'>
-                        <Dialog.Close className='px-4 py-2 transition w-32 flex justify-center  rounded-lg border-2 text-zinc-800 border-zinc-800 font-semibold text-sm  hover:border-zinc-900 hover:text-zinc-900'>
-                            Cancelar
+                     <Dialog.Close asChild>
+                            <Button variant='withoutBackground' className='w-32 h-auto'>
+                                Cancelar
+                            </Button>
+
                         </Dialog.Close>
-                        <button 
-                            disabled={isDeletingPost}
+                   
+                       
+                        <Button 
+                            variant='danger' 
+                            className='w-32 h-auto'
                             onClick={handleDeletePost}
-                            className='bg-red-500 py-2 transition w-32 flex justify-center  px-4 rounded-lg text-white font-semibold text-sm disabled:bg-red-300 disabled:cursor-not-allowed hover:bg-red-600'
                         >
                             Exclúir
-                        </button>
+                        </Button>
+                     
 
                     </div>
 

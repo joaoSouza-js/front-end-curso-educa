@@ -3,11 +3,30 @@ import { TextInput } from "../../components/Input";
 import { Search,SlidersHorizontal } from "lucide-react";
 import { Card } from "./components/Card";
 import { useEffect, useState } from "react";
-import api from "../../services/api";
 import { usePost } from "../../hooks/usePost";
+import { FilterModal } from "../../components/FilterModal";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+const searchSchema = z.object({
+    search: z.string().optional()
+})
+
+type SearchSchemaType = z.infer<typeof searchSchema>
 
 export function Home(){
     const [isFetchingPost, setIsFetchingPost,] = useState(false)
+
+    const {watch, handleSubmit,register} = useForm<SearchSchemaType>({
+        resolver: zodResolver(searchSchema),
+        defaultValues: {
+            search: ''
+        }
+    })
+    
+    const {search} = watch()
+
 
     const {fetchPosts,posts} = usePost()
 
@@ -43,12 +62,15 @@ export function Home(){
                             />
                         </TextInput.Root>
                     </form>
-                    <button title="Filtro">
-                        <SlidersHorizontal 
-                            size={34} 
-                            className="text-purple-600 hover:text-purple-800 hover:transition"   
-                        />
-                    </button>
+                    <FilterModal inputValue={search} >
+                        <button title="Filtro">
+                            <SlidersHorizontal 
+                                size={34} 
+                                className="text-purple-600 hover:text-purple-800 hover:transition"   
+                            />
+                        </button>
+
+                    </FilterModal>
 
 
                 </div>

@@ -37,6 +37,7 @@ export function PostContextProvider({children}: PostContextProviderProps){
         }
 
     }
+    
 
     async function createPost(post: POST_DTO_CREATE){
         const {title, content,categoryId,schedule} = post
