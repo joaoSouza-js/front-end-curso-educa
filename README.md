@@ -1,4 +1,4 @@
-Claro, vou resumir o que fiz no teste de desenvolvimento:
+Vou resumir o que fiz no teste de desenvolvimento:
 
 1. Criei uma API usando Fastify, que é responsável por gerenciar os dados das postagens.
    - O código-fonte da API pode ser encontrado [aqui](https://github.com/joaoSouza-js/api_with_fastify).
@@ -7,7 +7,7 @@ Claro, vou resumir o que fiz no teste de desenvolvimento:
 2. Desenvolvi a interface do usuário no Figma.
    - O design do projeto está disponível [aqui](https://www.figma.com/file/uYqLmMeSNwDAI0ZjlfiMNt/social-network-test?type=design&node-id=0%3A1&mode=design&t=rQ2xr4qpJU9fLbe8-1).
 
-3. Implementei o front-end da aplicação usando React, Redux e Vite.
+3. Implementei o front-end da aplicação usando React, ContextApi e Vite.
    - As configurações do pacote para o front-end estão disponíveis no arquivo `package.json`.
    - Usei pnpm como gerenciador de pacotes, mas os desenvolvedores podem optar por Yarn ou npm.
 
