@@ -26,17 +26,21 @@ export function Card({post,className, ...rest}:CardProps){
 
                 <div className='overflow-auto text-sm'  dangerouslySetInnerHTML={{ __html: content }}/>
 
-                
-            {
-                post.owner && (
-                    <DeletePostModal postId={post.id}>
-                        <button type='button' className='self-end'>
-                            <Trash2 size={24} />
-                        </button>
-                    </DeletePostModal>
+            <div className='flex justify-between'>
+            <span>por {post.author}</span>
+                {
+                    post.owner && (
+                        <DeletePostModal postId={post.id}>
+                            
+                            <button type='button' className=''>
+                                <Trash2 size={24} />
+                            </button>
+                        </DeletePostModal>
 
-                )
-            }
+                    )
+                }
+
+            </div>
              
 
         </div>

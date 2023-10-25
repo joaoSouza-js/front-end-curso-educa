@@ -9,26 +9,21 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-const searchSchema = z.object({
-    search: z.string().optional()
-})
 
-type SearchSchemaType = z.infer<typeof searchSchema>
+
 
 export function Home(){
     const [isFetchingPost, setIsFetchingPost,] = useState(false)
+    const [search, setSearch] = useState('')
+    const {filterPosts,listFiltredPosts,fetchPosts} = usePost()
 
-    const {watch, handleSubmit,register} = useForm<SearchSchemaType>({
-        resolver: zodResolver(searchSchema),
-        defaultValues: {
-            search: ''
-        }
-    })
-    
-    const {search} = watch()
-
-
-    const {fetchPosts,posts} = usePost()
+    function handleFilter(value: string){
+        setSearch(value)
+        filterPosts({
+            authorName: search || ''
+        })
+        
+    }
 
     async function handleFetchPost(){
         setIsFetchingPost(true)
@@ -45,20 +40,23 @@ export function Home(){
     useEffect(() => {
         handleFetchPost()
     }, [])
-
     return (
         <div >
             <Header/> 
             
-            <div className="px-4 py-5">
-                <div className="flex items-center gap-y-2 gap-x-2">
-                    <form className="w-full">
-
-                        <TextInput.Root>
+            <div className="px-4 py-5   max-w-[700px] flex mx-auto flex-col items-center ">
+                <div className="flex items-center gap-y-2 gap-x-2 w-full">
+                    <form 
+                        className="w-full"
+                       
+                    >
+                        <TextInput.Root>                      
                             <TextInput.Input
-                                placeholder="Digite o titulo do post"
+                                placeholder="Digite o Nome do autor"
                                 type="text"
                                 icon={<Search size={16} />}
+                                value={search}
+                                onChange={event => handleFilter(event.target.value)}
                             />
                         </TextInput.Root>
                     </form>
@@ -76,7 +74,7 @@ export function Home(){
                 </div>
                 <main className="flex flex-col gap-4 pt-5">
                     {
-                        posts.map(post => (
+                        listFiltredPosts.map(post => (
                             <Card
                                 key={post.id}
                                 post={post}
